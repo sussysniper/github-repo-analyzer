@@ -3,46 +3,53 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#101716">
-  <meta name="description" content="A considered view of any public GitHub repository: activity, language makeup, and key metrics.">
-  <title>Repository Atlas — GitHub repository analyzer</title>
-  <link rel="icon" href="favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="style.css">
+  <meta name="theme-color" content="#111113">
+  <meta name="description" content="Explore public GitHub repositories through their code, key metrics, and latest commits. A focused, independent developer tool.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Repository Atlas — Read between the lines of code">
+  <meta property="og:description" content="A focused view of public GitHub repositories: key metrics, language composition, and recent commits.">
+  <meta name="twitter:card" content="summary">
+  <title>Repository Atlas — GitHub Repository Analyzer</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
   <div class="app-shell">
     <header class="site-header">
-      <a class="brand" href="./" aria-label="Repository Atlas home"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 24 16 5l11 19H5Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M11 24 16 15l5 9" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span><span>repository<span class="brand-accent">atlas</span></span></a>
-      <span class="header-note">A clearer view of open source</span>
-      <a class="header-link" href="https://github.com" target="_blank" rel="noopener noreferrer">Explore GitHub <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="brand" href="/" aria-label="Repository Atlas home"><svg class="brand-mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><path d="M7 32 19.8 7 33 32H7Z" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M13 32 20 18l7 14" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M11 26h18" stroke="currentColor" stroke-width="2.2"/></svg><span>Repository <strong>Atlas</strong></span></a>
+      <span class="header-note">An independent lens on open source</span>
+      <a class="header-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a>
     </header>
 
-    <main>
+    <main id="main">
       <section class="intro" aria-labelledby="page-title">
-        <div class="intro-copy"><p class="eyebrow"><span class="status-dot"></span> GITHUB REPOSITORY INTELLIGENCE</p><h1 id="page-title">See the whole project<br><em>at a glance.</em></h1><p class="intro-description">The essential signals behind any public GitHub repository, gathered into one focused view.</p></div>
-        <div class="intro-aside" aria-hidden="true"><span class="aside-line"></span><span>01 / EXPLORE</span></div>
+        <p class="eyebrow"><span class="eyebrow-rule" aria-hidden="true"></span> A REPOSITORY, IN FOCUS</p>
+        <div class="hero-grid"><div><h1 id="page-title">Read between<br>the lines <em>of code.</em></h1><p class="intro-description">A sharper view of any public GitHub project. Discover what it’s made of, how it’s moving, and what happened most recently.</p></div><div class="hero-aside"><span class="hero-aside-index">01 / 03</span><p>Open source has a story.<br>Start with a URL.</p><span class="hero-aside-line" aria-hidden="true"></span></div></div>
       </section>
 
       <section class="search-section" aria-label="Analyze a repository">
         <form id="repo-form" novalidate>
-          <label for="repo-url">Repository URL</label>
-          <div class="input-row"><span class="input-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><path d="M9 19c-4.2 1.4-4.2-2.3-5.9-2.8M15 22v-3.8a3.3 3.3 0 0 0-.9-2.6c3-.3 6.2-1.5 6.2-6.8a5.3 5.3 0 0 0-1.4-3.7 5 5 0 0 0-.1-3.6S17.7 1.2 15 3a11.7 11.7 0 0 0-6 0C6.3 1.2 5.2 1.5 5.2 1.5a5 5 0 0 0-.1 3.6 5.3 5.3 0 0 0-1.4 3.7c0 5.3 3.2 6.5 6.2 6.8a3.3 3.3 0 0 0-.9 2.6V22" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span><input id="repo-url" name="repository" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://github.com/owner/repository" aria-describedby="input-help" required><button id="analyze-button" type="submit">Analyze repository <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 10h11m-4-4 4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button></div>
-          <p id="input-help" class="input-help">Paste a public GitHub repository link. No account or token needed.</p>
+          <div class="search-heading"><label for="repo-url">Enter a repository URL</label><span>PUBLIC REPOSITORIES</span></div>
+          <div class="input-row"><input id="repo-url" name="repository" type="url" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://github.com/owner/repository" aria-describedby="input-help" required><button id="analyze-button" type="submit"><span id="button-label">Analyze repository</span><span class="button-glyph" aria-hidden="true">↗</span></button></div>
+          <p id="input-help" class="input-help">No sign-in. No token. Just a public GitHub link.</p>
         </form>
       </section>
 
-      <section id="feedback" class="feedback" role="status" aria-live="polite" hidden></section>
+      <p id="feedback" class="feedback" role="status" aria-live="polite" hidden></p>
 
-      <section id="empty-state" class="empty-state" aria-label="Getting started"><div class="empty-visual" aria-hidden="true"><div class="empty-orbit orbit-one"></div><div class="empty-orbit orbit-two"></div><div class="empty-center"><svg viewBox="0 0 48 48" fill="none"><path d="M9 36 24 9l15 27H9Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><path d="M17 36 24 23l7 13" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="24" cy="9" r="2.5" fill="currentColor"/></svg></div></div><div class="empty-copy"><span class="section-index">YOUR WORKSPACE</span><h2>Start with a repository.</h2><p>Enter a URL to reveal its vital signs, language composition, and most recent work.</p></div><div class="empty-bottom"><span>PUBLIC REPOSITORIES ONLY</span><span>POWERED BY GITHUB API</span></div></section>
+      <section id="empty-state" class="empty-state" aria-labelledby="empty-title"><div class="empty-number" aria-hidden="true">RA<span>—</span>01</div><div><p class="eyebrow">READY WHEN YOU ARE</p><h2 id="empty-title">Your next discovery<br>starts here.</h2><p>Paste a repository URL above to explore its essentials.</p></div></section>
+
+      <section id="loading-state" class="loading-state" aria-label="Loading repository analysis" hidden><div class="skeleton-heading skeleton"></div><div class="skeleton-subtitle skeleton"></div><div class="skeleton-metrics"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div><div class="skeleton-panels"><div class="skeleton"></div><div class="skeleton"></div></div></section>
 
       <section id="results" class="results" aria-label="Repository analysis" hidden>
-        <div class="result-heading"><div><p class="section-index">REPOSITORY OVERVIEW <span class="index-rule"></span> <span id="updated-at"></span></p><h2 id="repo-name"></h2><p id="repo-description" class="repo-description"></p></div><a id="repo-link" class="view-repo" target="_blank" rel="noopener noreferrer">View repository <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M5 15 15 5M7 5h8v8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
-        <div class="stat-grid"><article class="stat-card"><span>STARS</span><strong id="stat-stars">—</strong><small>People watching the project</small></article><article class="stat-card"><span>FORKS</span><strong id="stat-forks">—</strong><small>Independent copies</small></article><article class="stat-card"><span>OPEN ISSUES &amp; PRS</span><strong id="stat-issues">—</strong><small>GitHub's combined open count</small></article><article class="stat-card"><span>PRIMARY LANGUAGE</span><strong id="stat-language">—</strong><small>As reported by GitHub</small></article></div>
-        <div class="detail-grid"><section class="panel language-panel" aria-labelledby="languages-title"><div class="panel-heading"><div><p class="section-index">CODEBASE</p><h3 id="languages-title">Language makeup</h3></div><span class="panel-corner">BY BYTES</span></div><div id="language-chart" class="language-chart"></div><ol id="language-list" class="language-list"></ol></section><section class="panel commits-panel" aria-labelledby="commits-title"><div class="panel-heading"><div><p class="section-index">ACTIVITY</p><h3 id="commits-title">Recent commits</h3></div><span class="panel-corner">LATEST 05</span></div><ol id="commit-list" class="commit-list"></ol></section></div>
+        <div class="result-heading"><div><p class="section-label">REPOSITORY / <span id="updated-at"></span></p><h2 id="repo-name"></h2><p id="repo-description" class="repo-description"></p></div><a id="repo-link" class="view-repo" target="_blank" rel="noopener noreferrer">Open on GitHub <span aria-hidden="true">↗</span></a></div>
+        <div class="metrics" aria-label="Repository metrics"><div class="metric"><span class="metric-label">STARS</span><strong id="stat-stars">—</strong><span class="metric-note">Appreciation</span></div><div class="metric"><span class="metric-label">FORKS</span><strong id="stat-forks">—</strong><span class="metric-note">Independent copies</span></div><div class="metric"><span class="metric-label">OPEN ISSUES &amp; PRS</span><strong id="stat-issues">—</strong><span class="metric-note">Combined GitHub count</span></div><div class="metric"><span class="metric-label">PRIMARY LANGUAGE</span><strong id="stat-language">—</strong><span class="metric-note">GitHub classification</span></div></div>
+        <div class="detail-grid"><section class="panel language-panel" aria-labelledby="languages-title"><div class="panel-heading"><div><p class="section-label">01 / COMPOSITION</p><h3 id="languages-title">A language portrait.</h3></div><span class="panel-note">SHARE OF CODE / BYTES</span></div><div id="language-chart" class="language-chart"></div><ol id="language-list" class="language-list"></ol></section><section class="panel commits-panel" aria-labelledby="commits-title"><div class="panel-heading"><div><p class="section-label">02 / MOMENTUM</p><h3 id="commits-title">The latest work.</h3></div><span class="panel-note">UP TO FIVE COMMITS</span></div><div id="commit-activity" class="commit-activity"></div><ol id="commit-list" class="commit-list"></ol></section></div>
       </section>
     </main>
-    <footer class="site-footer"><span>REPOSITORY ATLAS</span><span>Built for the curious. Data from the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener noreferrer">GitHub REST API</a>.</span></footer>
+    <footer class="site-footer"><span class="footer-brand">Repository Atlas</span><p>Independent project. Repository data from the <a href="https://docs.github.com/en/rest" target="_blank" rel="noopener noreferrer">GitHub REST API</a>.</p><a href="/privacy.html">Privacy</a></footer>
   </div>
-  <script type="module" src="app.mjs"></script>
+  <script type="module" src="/app.mjs"></script>
 </body>
 </html>
