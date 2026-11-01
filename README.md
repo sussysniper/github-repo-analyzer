@@ -1,39 +1,77 @@
 # Repository Atlas
 
-Repository Atlas is an independent, static GitHub repository analyzer. Enter a public `https://github.com/owner/repo` URL to see repository metrics, language composition, and the latest five commits in a responsive editorial interface.
+**A modern, interactive GitHub repository analytics dashboard.**
+
+Explore public GitHub repositories through a refined interface featuring repository statistics, programming-language visualizations, and recent commit activity.
+
+Built with vanilla JavaScript, HTML, and CSS. Designed to be lightweight, responsive, accessible, and security-conscious.
+
+**[Live Application](https://github-repo-analyzer-alpha.vercel.app/)** · **[Source Code](https://github.com/sussysniper/github-repo-analyzer)**
+
+---
+
+## Overview
+
+Repository Atlas transforms publicly available GitHub repository information into a clean, interactive analytics experience.
+
+Instead of navigating multiple GitHub pages, users can enter a repository URL and explore its key statistics, language composition, and recent development activity in one place.
+
+The application combines an original cinematic-inspired design with a lightweight frontend architecture, meaningful data visualizations, and defensive handling of external API data.
 
 ## Features
 
-- Repository description, stars, forks, GitHub's combined **open issues and pull requests** count, and primary language.
-- Language distribution calculated from GitHub's reported bytes, with a keyboard-readable chart and text legend.
-- Up to five recent commits with messages, authors, dates, and a sequence diagram. The diagram shows order, **not** a fabricated time trend.
-- Clear loading, empty, success, error, rate-limit, and empty-repository states.
-- Reduced-motion behavior, visible keyboard focus, no visitor account, and no analytics scripts.
+### Repository Analytics
 
-## Run and test
+- Repository name and description
+- Star and fork counts
+- Open issues and pull requests count, as reported by GitHub
+- Primary programming language
+- Direct links to relevant GitHub resources
 
-Use any static server to serve `dist/`, for example `npx serve dist`. Opening the HTML file directly is insufficient because it imports JavaScript modules. Node 20+ is needed for the tests:
+### Interactive Data Visualizations
 
-```sh
-npm test
-```
+- Programming-language distribution calculated from GitHub's reported language byte counts
+- Visual representation of the five most recent commits
+- Commit messages, authors, and timestamps
+- Keyboard-accessible chart labels and supporting text
+- Responsive visualizations for different screen sizes
 
-There are no runtime packages and no build step. `dist/index.html` is the page; `dist/style.css` is the design system; `dist/app.mjs` renders safe DOM nodes; `dist/data.mjs` validates input and GitHub API responses; `dist/search.mjs` prevents stale search results. Tests live in `tests/`.
+The commit visualization represents the sequence of recent commits rather than a complete historical activity trend.
 
-## Data and security
+### User Experience
 
-The browser makes at most three sequential unauthenticated requests per analysis to the official [GitHub REST API](https://docs.github.com/en/rest): repository details, languages, and `commits?per_page=5`. No token or secret is embedded. GitHub limits unauthenticated traffic by source IP; the app shows rate-limit errors instead of retrying automatically. Untrusted text is inserted with `textContent`, external links are restricted to validated HTTPS GitHub URLs, and Vercel sets a restrictive CSP and other response headers in `vercel.json`. See [SECURITY.md](SECURITY.md) for the threat model, review, and residual risks.
+- Original charcoal-and-coral visual design
+- Smooth transitions and purposeful animations
+- Responsive layouts for desktop, tablet, and mobile
+- Animated loading states and contextual feedback
+- Helpful error messages and recovery states
+- Keyboard navigation and visible focus indicators
+- Reduced-motion support for accessibility
 
-## Privacy and attribution
+### Reliability
 
-The app does not store searches, set its own cookies, or load analytics. Requests still expose ordinary request data to Vercel (hosting) and GitHub (API). Read the visitor-facing [privacy notice](dist/privacy.html). Repository Atlas is not affiliated with or endorsed by GitHub or the named design inspirations. The design and favicon are original. No separate terms of service are provided for this simple informational site; obtain legal advice if the product or data practices change.
+- Validation of repository URLs
+- Handling of unavailable and empty repositories
+- GitHub API rate-limit error handling
+- Network timeout handling
+- Prevention of stale search results overwriting newer requests
+- Automated regression tests
 
-## Deploy on Vercel
+---
 
-Import the **existing** GitHub repository as a Vercel project, choose Framework Preset **Other**, leave the build command empty, and use `dist` as the output directory. `vercel.json` specifies the output directory and security headers. Vercel preview deployments can be reviewed before production publication. Check the actual response headers after deployment, because host settings may affect them. `dist/404.html` provides the custom missing-page content when the host supports it.
+## Tech Stack
 
-The earlier ChatGPT Sites deployment is separate and remains available; this Vercel configuration does not alter it.
+| Technology | Purpose |
+|---|---|
+| HTML5 | Semantic page structure |
+| CSS3 | Responsive layouts, visual design, and animations |
+| JavaScript (ES Modules) | Application logic and interactive rendering |
+| GitHub REST API | Public repository data |
+| Node.js | Automated testing |
+| Vercel | Static hosting and deployment |
 
-## Limitations
+The application does not require a frontend framework, database, authentication system, or runtime package dependencies.
 
-Only public repositories are supported. GitHub may return the same 404 for a private or missing repository. Some repositories have no language or commit data. The language breakdown reflects byte totals, not code quality. The commit diagram shows the latest available entries in sequence and makes no claim about historical velocity.
+## How It Works
+
+1. The user enters a public GitHub
