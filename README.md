@@ -1,21 +1,39 @@
 # Repository Atlas
 
-A dark, responsive GitHub repository analyzer built with vanilla HTML, CSS, and JavaScript. Paste a public repository URL to see core repository metrics, language distribution, and the five latest commits.
+Repository Atlas is an independent, static GitHub repository analyzer. Enter a public `https://github.com/owner/repo` URL to see repository metrics, language composition, and the latest five commits in a responsive editorial interface.
 
-## Run locally
+## Features
 
-Serve the `dist` directory with any static HTTP server, then open its local URL. For example, from the project root: `python -m http.server 8000 -d dist`. Modules require HTTP rather than opening `index.html` directly as a file. Run the focused tests with `npm test` (Node 20+). No install step or runtime dependency is required.
+- Repository description, stars, forks, GitHub's combined **open issues and pull requests** count, and primary language.
+- Language distribution calculated from GitHub's reported bytes, with a keyboard-readable chart and text legend.
+- Up to five recent commits with messages, authors, dates, and a sequence diagram. The diagram shows order, **not** a fabricated time trend.
+- Clear loading, empty, success, error, rate-limit, and empty-repository states.
+- Reduced-motion behavior, visible keyboard focus, no visitor account, and no analytics scripts.
 
-## Architecture
+## Run and test
 
-`dist/index.html` holds the semantic page structure. `dist/style.css` contains the responsive visual system. `dist/app.mjs` handles form states and safe DOM rendering. `dist/data.mjs` parses URLs, normalizes GitHub responses, and calls the official REST API. `tests/data.test.mjs` covers URL validation and important data cases.
+Use any static server to serve `dist/`, for example `npx serve dist`. Opening the HTML file directly is insufficient because it imports JavaScript modules. Node 20+ is needed for the tests:
 
-The client requests `GET /repos/{owner}/{repo}`, `/languages`, and `/commits?per_page=5` from GitHub's public API. It stores no data or credentials. GitHub's `open_issues_count` includes pull requests, so the UI labels it **Open issues & PRs**. Language shares are based on GitHub's byte counts, not file counts.
+```sh
+npm test
+```
 
-## Limits
+There are no runtime packages and no build step. `dist/index.html` is the page; `dist/style.css` is the design system; `dist/app.mjs` renders safe DOM nodes; `dist/data.mjs` validates input and GitHub API responses; `dist/search.mjs` prevents stale search results. Tests live in `tests/`.
 
-Only public repositories are available. Unauthenticated GitHub API requests are rate limited. A private or missing repository returns the same 404 response. Empty repositories may have no commits or language data. Network and rate limit errors are shown in the interface.
+## Data and security
 
-## Deploy
+The browser makes at most three sequential unauthenticated requests per analysis to the official [GitHub REST API](https://docs.github.com/en/rest): repository details, languages, and `commits?per_page=5`. No token or secret is embedded. GitHub limits unauthenticated traffic by source IP; the app shows rate-limit errors instead of retrying automatically. Untrusted text is inserted with `textContent`, external links are restricted to validated HTTPS GitHub URLs, and Vercel sets a restrictive CSP and other response headers in `vercel.json`. See [SECURITY.md](SECURITY.md) for the threat model, review, and residual risks.
 
-Upload the contents of `dist` to any free static host, or use the included Sites hosting manifest when deployed through Codex Sites. No build command, server, database, or environment variables are needed.
+## Privacy and attribution
+
+The app does not store searches, set its own cookies, or load analytics. Requests still expose ordinary request data to Vercel (hosting) and GitHub (API). Read the visitor-facing [privacy notice](dist/privacy.html). Repository Atlas is not affiliated with or endorsed by GitHub or the named design inspirations. The design and favicon are original. No separate terms of service are provided for this simple informational site; obtain legal advice if the product or data practices change.
+
+## Deploy on Vercel
+
+Import the **existing** GitHub repository as a Vercel project, choose Framework Preset **Other**, leave the build command empty, and use `dist` as the output directory. `vercel.json` specifies the output directory and security headers. Vercel preview deployments can be reviewed before production publication. Check the actual response headers after deployment, because host settings may affect them. `dist/404.html` provides the custom missing-page content when the host supports it.
+
+The earlier ChatGPT Sites deployment is separate and remains available; this Vercel configuration does not alter it.
+
+## Limitations
+
+Only public repositories are supported. GitHub may return the same 404 for a private or missing repository. Some repositories have no language or commit data. The language breakdown reflects byte totals, not code quality. The commit diagram shows the latest available entries in sequence and makes no claim about historical velocity.
